@@ -1,18 +1,31 @@
 {
     "compilerOptions": {
         "strict": true,
-        "module": "es2022",
+        "module": "esnext",
         "target": "es6",
         "allowJs": true,
         "moduleResolution": "node",
-        "baseUrl": ".",
+        "resolveJsonModule": true,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "verbatimModuleSyntax": true,
+        "baseUrl": "./",
         "paths": {
-            "@app/*": ["./src/*"]
-        }
+            "@/*": ["src/*"]
+        },
+        "lib": [
+            "ES2022",
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "types": [
+            "node"
+        ]
     },
     "include": [
-        "./src/**/*.ts",
-        "./src/**/*.vue"
+        "src/**/*",
+        "src/**/*.vue"
     ],
     "exclude": [
         "node_modules"

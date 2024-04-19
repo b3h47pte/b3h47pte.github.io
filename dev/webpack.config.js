@@ -1,9 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require('path')
 
 module.exports = {
-    entry: './src/index.ts',
+    mode: 'production',
+    entry: ['./src/index.ts', './src/index.css'],
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, '../', 'dist'),
@@ -27,23 +29,29 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.js$/,
+                test: /\.css$/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env']
-                        }
-                    }
-                ],
-                exclude: /node_modules/,
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ]
             },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                },
+                exclude: /node_modules/,
+            }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js', '.vue'],
+        extensions: ['.ts', '.js', '.vue', '.css'],
         alias: {
-            '@app':  path.resolve(__dirname, 'src'),
+            '@':  path.resolve(__dirname, 'src')
         }
     },
     plugins: [
@@ -52,5 +60,6 @@ module.exports = {
             template: 'src/index.html',
             inject: 'body',
         }),
+        new MiniCssExtractPlugin()
     ],
 };
