@@ -22,7 +22,7 @@
     animation-name: mantafade;
     animation-duration: 20s;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: linear;
     filter: blur(10px);
 }
 #background-video {
