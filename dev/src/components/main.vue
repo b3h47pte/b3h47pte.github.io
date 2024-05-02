@@ -2,11 +2,12 @@
 </script>
 
 <template>
-    <div id="main-container" class="flex flex-col h-full place-content-center">
-        
-        <video id="background-video" autoplay loop muted poster="assets/manta.jpg">
-            <source src="assets/manta.mp4" type="video/mp4">
-        </video>
+    <div class="flex flex-col h-full place-content-center">
+        <div id="video-container">
+            <video id="background-video" autoplay loop muted poster="assets/manta.jpg">
+                <source src="assets/manta.mp4" type="video/mp4">
+            </video>
+        </div>
 
         <div class="profile-image-content mx-auto">
         </div>
@@ -37,28 +38,6 @@
 
 <style>
 
-#main-container {
-    background: linear-gradient(
-        90deg,
-        rgba(30, 41, 59, 0.8) 50%,
-        rgba(30, 41, 59, 0.802) 52.025%,
-        rgba(30, 41, 59, 0.809) 53.875%,
-        rgba(30, 41, 59, 0.820) 55.625%,
-        rgba(30, 41, 59, 0.835) 57.25%,
-        rgba(30, 41, 59, 0.852) 58.825%,
-        rgba(30, 41, 59, 0.870) 60.3%,
-        rgba(30, 41, 59, 0.89) 61.775%,
-        rgba(30, 41, 59, 0.91) 63.225%,
-        rgba(30, 41, 59, 0.9296) 64.7%,
-        rgba(30, 41, 59, 0.9482) 66.175%,
-        rgba(30, 41, 59, 0.965) 67.75%,
-        rgba(30, 41, 59, 0.9792) 69.375%,
-        rgba(30, 41, 59, 0.9902) 71.125%,
-        rgba(30, 41, 59, 0.997) 72.975%,
-        rgb(30, 41, 59) 75%
-    );
-}
-
 .profile-image-content {
     background-image: url("assets/profile.jpg");
     background-repeat: no-repeat;
@@ -68,7 +47,7 @@
     mask-image: radial-gradient(rgba(0,0,0,1.0) 0%, rgba(0,0,0,1.0) 40%, transparent 65%);
 }
 
-#background-video {
+#video-container {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -77,20 +56,21 @@
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
-    transform: translateX(-20%);
-    background-color: rgb(30, 41, 59);
+    z-index: -2;
     animation-name: mantafade;
     animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    filter: blur(10px);
 }
 
-#background-video::before {
-    position: fixed;
+#background-video {
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(15px);
+    object-fit: cover;
+    position: fixed;
+    opacity: 0.15;
+    z-index: -1;
 }
 
 @keyframes mantafade {
